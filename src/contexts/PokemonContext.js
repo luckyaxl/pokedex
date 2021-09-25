@@ -6,10 +6,11 @@ export const PokemonContext = createContext();
 export function PokemonProvider({ children }) {
   const [pokemons, setPokemons] = useState([]);
   const [offset, setOffset] = useState(0);
-  const [hasMore, setHasMore] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
 
   const payload = {
     variables: {
+      limit: 18,
       offset,
     },
   };
@@ -17,16 +18,21 @@ export function PokemonProvider({ children }) {
   const { data } = usePokemonsQuery(payload);
   const results = data?.pokemons;
 
-  const loadMore = async () => {
-    if (results?.nextOffset) {
-      await setOffset(results?.nextOffset);
+  const loadMore = () => {
+    if (hasMore) {
+      setTimeout(() => {
+        setOffset(data?.pokemons?.nextOffset);
+      }, 500);
     }
   };
 
   useEffect(() => {
     if (results) {
       setPokemons(pokemons.concat(results?.results));
-      setHasMore(Boolean(results.nextOffset));
+
+      if (pokemons.length === results?.pokemons?.count) {
+        setHasMore(false);
+      }
     }
   }, [data]);
 
