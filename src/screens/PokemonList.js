@@ -1,4 +1,4 @@
-import Grid from "@material-ui/core/Grid";
+import Grid from "@mui/material/Grid";
 import Link from "next/link";
 import React, { useContext } from "react";
 import InfiniteScroll from "react-infinite-scroller";

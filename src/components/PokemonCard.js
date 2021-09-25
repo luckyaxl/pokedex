@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Grid from "@material-ui/core/Grid";
+import Grid from "@mui/material/Grid";
 import styled from "@emotion/styled";
 import { leadZero } from "src/utils/leadZero";
 
