@@ -5,12 +5,10 @@ const Container = styled(MuiContainer)`
   padding-top: 40px;
   padding-bottom: 40px;
 
-  @media only screen and (max-width: 600px) {
-    padding-top: 80px;
-  }
-
-  .title {
-    font-size: 30px;
+  .layout {
+    @media only screen and (max-width: 600px) {
+      margin-top: 20px;
+    }
   }
 `;
 

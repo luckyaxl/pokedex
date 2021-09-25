@@ -5,7 +5,7 @@ import { usePokemonQuery } from "src/hooks/usePokemon";
 import Detail from "src/components/PokemonDetail";
 import PokemonDetailCard from "src/components/PokemonDetailCard";
 import NavBar from "src/components/NavBar";
-
+import Loader from "src/components/Loader";
 
 function PokemonDetail({ name }) {
   const { error, loading, data } = usePokemonQuery({
@@ -17,12 +17,12 @@ function PokemonDetail({ name }) {
 
   if (error) return "no data";
 
-  if (loading) return "loading";
+  if (loading) return <Loader />;
 
   return (
     <Container>
       <NavBar />
-      <Grid container spacing={2}>
+      <Grid container spacing={2} className="layout">
         <Grid item lg={6} sm={12} xs={12}>
           <Detail pokemon={data?.pokemon} />
         </Grid>

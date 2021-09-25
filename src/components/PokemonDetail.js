@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import Router from "next/router";
 import React from "react";
+import FlashOnIcon from '@mui/icons-material/FlashOn';
 
 function PokemonDetail({ pokemon }) {
   return (
@@ -23,7 +24,10 @@ function PokemonDetail({ pokemon }) {
       </div>
 
       <Catch onClick={() => Router.back()}>
-        <button className="button">Catch</button>
+        <button className="btn">
+          <FlashOnIcon className="btn-icon" />
+          Catch Pokemon
+        </button>
       </Catch>
     </Detail>
   );
@@ -31,7 +35,7 @@ function PokemonDetail({ pokemon }) {
 
 const Detail = styled.div`
   width: 100%;
-
+  
   .info {
     margin-bottom: 30px;
     display: flex;
@@ -74,8 +78,9 @@ const Detail = styled.div`
     filter: drop-shadow(0 0 0.75rem crimson);
 
     img {
-      height: 300px;
+      height: calc(100vh - 260px);
       padding: 20px;
+      width: 100%;
     }
 
     @media only screen and (max-width: 600px) {
@@ -95,6 +100,8 @@ const Detail = styled.div`
 
 const Catch = styled.div`
   position: relative;
+  width: 100%;
+
   @media only screen and (max-width: 600px) {
     width: 100%;
     bottom: 0;
@@ -105,12 +112,12 @@ const Catch = styled.div`
     left: 0;
     padding: 15px;
     z-index: 1000;
-    .button {
+    .btn {
       width: 100%;
     }
   }
 
-  .button {
+  .btn {
     color: white;
     padding: 10px 30px;
     font-weight: 800;
@@ -124,6 +131,16 @@ const Catch = styled.div`
     justify-content: center;
     -webkit-box-align: center;
     align-items: center;
+    transition: 0.3s;
+
+    &:hover {
+      background: #035edc;
+    }
+
+    .btn-icon {
+      font-size: 17px;
+      margin-right: 5px;
+    }
   }
 `;
 
