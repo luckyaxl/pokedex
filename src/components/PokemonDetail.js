@@ -3,10 +3,11 @@ import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import Router from "next/router";
 import React from "react";
 import FlashOnIcon from "@mui/icons-material/FlashOn";
-import { leadZero } from "src/utils/leadZero";
+import { capitalize, leadZero } from "src/utils/leadZero";
 import ModalPokemonCaught from "src/components/ModalPokemonCaught";
+import CatchingPokemonIcon from "@mui/icons-material/CatchingPokemon";
 
-function PokemonDetail({ pokemon }) {
+function PokemonDetail({ pokemon, owned }) {
   const [isCatching, setIsCatching] = React.useState(false);
   const [catched, setCatched] = React.useState(false);
 
@@ -37,7 +38,7 @@ function PokemonDetail({ pokemon }) {
         </div>
         <div>
           <div className="id">#{leadZero(pokemon.id, 3)}</div>
-          <div className="title">{pokemon.name}</div>
+          <div className="title">{capitalize(pokemon.name)}</div>
         </div>
       </div>
 
@@ -52,12 +53,17 @@ function PokemonDetail({ pokemon }) {
         )}
       </div>
 
-      <Catch onClick={() => catchPokemon()}>
+      <Catch>
         {isCatching ? (
           <div className="catcing">Catching ...</div>
+        ) : owned ? (
+          <button className="btn red">
+            <CatchingPokemonIcon className="btn-icon" />
+            Release
+          </button>
         ) : (
-          <button className="btn" disabled={isCatching}>
-            <FlashOnIcon className="btn-icon" />
+          <button className="btn" onClick={() => catchPokemon()}>
+            <CatchingPokemonIcon className="btn-icon" />
             {!isCatching ? "Catch Pokemon" : "Catching"}
           </button>
         )}
@@ -210,6 +216,10 @@ const Catch = styled.div`
       font-size: 17px;
       margin-right: 5px;
     }
+  }
+
+  .red {
+    background: red;
   }
 `;
 

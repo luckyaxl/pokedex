@@ -1,15 +1,15 @@
 import Link from "next/link";
 import Grid from "@mui/material/Grid";
 import styled from "@emotion/styled";
-import { leadZero } from "src/utils/leadZero";
+import { capitalize, leadZero } from "src/utils/leadZero";
 
 function PokemonCard({ data, owned }) {
   return (
     <Grid item lg={2} md={3} sm={6} xs={6}>
-      <Link href={owned ? `/mypokemons/${data?.name}` : `/${data?.name}`}>
+      <Link href={owned ? `/mypokemons/${data.name}` : `/${data.name}`}>
         <Card>
           <div className="id">
-            <small>#{leadZero(data?.id, 3)}</small>
+            <small>#{leadZero(data.id, 3)}</small>
           </div>
 
           <div className="img">
@@ -24,8 +24,8 @@ function PokemonCard({ data, owned }) {
           </div>
 
           <div className="info">
-            <div className="name">{data?.name}</div>
-            <div className="nickname">{data?.nickname}</div>
+            <div className="name">{capitalize(data.name)}</div>
+            <div className="nickname">{data.nickname}</div>
           </div>
         </Card>
       </Link>

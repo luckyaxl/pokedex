@@ -21,13 +21,13 @@ function PokemonDetail({ name }) {
 
   return (
     <Container>
-      <NavBar title={data?.pokemon?.name} />
+      <NavBar title={data.pokemon.name} />
       <Grid container spacing={2} className="layout">
         <Grid item lg={6} sm={12} xs={12}>
-          <Detail pokemon={data?.pokemon} />
+          <Detail pokemon={data.pokemon} owned={true} />
         </Grid>
         <Grid item lg={6} sm={12} xs={12}>
-          <PokemonDetailCard pokemon={data?.pokemon} />
+          <PokemonDetailCard pokemon={data.pokemon} />
         </Grid>
       </Grid>
     </Container>

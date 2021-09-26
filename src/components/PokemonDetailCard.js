@@ -6,7 +6,7 @@ function PokemonDetailCard({ pokemon }) {
     <Container>
       <h4>Types</h4>
       <div className="types">
-        {pokemon?.types.map((item, i) => (
+        {pokemon.types.map((item, i) => (
           <div key={i} className="type">
             {item.type.name}
           </div>
@@ -17,7 +17,7 @@ function PokemonDetailCard({ pokemon }) {
 
       <List>
         <ul className="move-list">
-          {pokemon?.moves.map((item, i) => (
+          {pokemon.moves.map((item, i) => (
             <li key={i} className="move">
               {item.move.name}
             </li>
