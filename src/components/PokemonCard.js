@@ -3,21 +3,29 @@ import Grid from "@mui/material/Grid";
 import styled from "@emotion/styled";
 import { leadZero } from "src/utils/leadZero";
 
-function PokemonCard({ data }) {
+function PokemonCard({ data, owned }) {
   return (
     <Grid item lg={2} md={3} sm={6} xs={6}>
-      <Link href={`/${data?.name}`}>
+      <Link href={owned ? `/mypokemons/${data?.name}` : `/${data?.name}`}>
         <Card>
           <div className="id">
             <small>#{leadZero(data?.id, 3)}</small>
           </div>
 
           <div className="img">
-            <img height="100%" width="100%" src={data?.dreamworld} />
+            <img
+              height="100%"
+              width="100%"
+              src={
+                data?.dreamworld ||
+                `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${data.id}.svg`
+              }
+            />
           </div>
 
           <div className="info">
-            <div className="title">{data?.name}</div>
+            <div className="name">{data?.name}</div>
+            <div className="nickname">{data?.nickname}</div>
           </div>
         </Card>
       </Link>
@@ -27,7 +35,7 @@ function PokemonCard({ data }) {
 
 const Card = styled.div`
   background-color: #282b39;
-  color: #FFFFFF;
+  color: #ffffff;
   border: 1px solid #3a3f50;
   min-height: 100px;
   border-radius: 8px;
@@ -45,9 +53,16 @@ const Card = styled.div`
   }
 
   &:active {
-    box-shadow: inset 0 4px 10px 0 rgb(0 0 0 / 20%), 0 2px 10px 0 rgb(0 0 0 / 20%);
+    box-shadow: inset 0 4px 10px 0 rgb(0 0 0 / 20%),
+      0 2px 10px 0 rgb(0 0 0 / 20%);
     background: yellow;
-    color: black
+    color: black;
+
+    .info {
+      .nickname {
+        color: black;
+      }
+    }
   }
 
   .id {
@@ -78,8 +93,14 @@ const Card = styled.div`
   .info {
     text-align: center;
 
-    .title {
+    .name {
       font-size: 20px;
+    }
+
+    .nickname {
+      margin-top: 5px;
+      font-size: 15px;
+      color: yellow;
     }
   }
 `;

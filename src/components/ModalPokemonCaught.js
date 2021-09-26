@@ -8,7 +8,6 @@ export default function AlertDialog({ open, close }) {
     <div>
       {open && (
         <Convetti
-          numberOfPieces={500}
           width={window.innerWidth}
           height={window.innerHeight}
         />

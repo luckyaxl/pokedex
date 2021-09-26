@@ -4,7 +4,7 @@ import React from "react";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import Router from "next/router";
 
-function AppBar() {
+function AppBar({ title }) {
   return (
     <NavBar>
       <nav>
@@ -14,6 +14,8 @@ function AppBar() {
             onClick={() => Router.back()}
           />
         </div>
+
+        <div className="title">{title}</div>
       </nav>
     </NavBar>
   );
@@ -56,6 +58,12 @@ const NavBar = styled.header`
     height: 52px;
     display: flex;
     align-items: center;
+  }
+
+  .title {
+    margin-left: 5px;
+    font-weight: bold;
+    font-size: 20px;
   }
 `;
 
