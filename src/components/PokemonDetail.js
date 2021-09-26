@@ -44,9 +44,10 @@ function PokemonDetail({ pokemon, owned }) {
 
       <div className="image">
         {isCatching ? (
-          <img className="balls" src="/pokeball2.png" />
+          <img alt=".." className="balls" src="/pokeball2.png" />
         ) : (
           <img
+            alt=".."
             className="pokemon"
             src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemon?.id}.svg`}
           />
@@ -121,12 +122,14 @@ const Detail = styled.div`
     img {
       height: 350px;
       padding: 20px;
+      width: auto;
       max-width: 100%;
     }
 
     @media only screen and (max-width: 600px) {
       img {
         height: 300px;
+        width: auto;
         max-width: 100%;
       }
     }

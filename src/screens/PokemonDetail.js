@@ -6,6 +6,8 @@ import NavBar from "src/components/NavBar";
 import Detail from "src/components/PokemonDetail";
 import PokemonDetailCard from "src/components/PokemonDetailCard";
 import { usePokemonQuery } from "src/hooks/usePokemon";
+import MetaTags from "src/utils/metaTags";
+import { capitalize } from "src/utils/leadZero";
 
 function PokemonDetail({ name }) {
   const { error, loading, data } = usePokemonQuery({
@@ -19,9 +21,12 @@ function PokemonDetail({ name }) {
 
   if (loading) return <Loader />;
 
+  const pokemonName = capitalize(data.pokemon.name);
+
   return (
     <Container>
-      <NavBar title={data.pokemon.name} />
+      <MetaTags title={pokemonName} />
+      <NavBar title={pokemonName} />
 
       <Grid container spacing={2} className="layout">
         <Grid item lg={6} sm={12} xs={12}>

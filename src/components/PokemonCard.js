@@ -14,6 +14,7 @@ function PokemonCard({ data, owned }) {
 
           <div className="img">
             <img
+              alt="..."
               height="100%"
               width="100%"
               src={

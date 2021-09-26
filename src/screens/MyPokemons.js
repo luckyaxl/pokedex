@@ -6,6 +6,7 @@ import React from "react";
 import Container from "src/components/Container";
 import NavBar from "src/components/NavBar";
 import PokemonCard from "src/components/PokemonCard";
+import MetaTags from "src/utils/metaTags";
 
 function PokemonDetail() {
   const mypokemons = [
@@ -18,6 +19,7 @@ function PokemonDetail() {
 
   return (
     <Container>
+      <MetaTags title="My Pokemons"/>
       <NavBar title="My Pokemons" />
       <Header>
         <div className="info layout">
