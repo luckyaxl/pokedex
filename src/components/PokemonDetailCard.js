@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "@emotion/styled";
-import clsx from "clsx";
 
 function PokemonDetailCard({ pokemon }) {
   return (
@@ -37,12 +36,12 @@ const Container = styled.div`
     user-select: none;
 
     .type {
-      background-color: #9bcc50;
+      background-color: #3a4152;
       font-weight: bold;
       margin-right: 10px;
       margin-bottom: 10px;
       align-self: center;
-      color: #FFFFFF;
+      color: #ffffff;
       font-size: 12px;
       padding: 7px 20px;
       border-radius: 5px;
@@ -52,18 +51,18 @@ const Container = styled.div`
   h4 {
     margin-top: 0px;
     margin-bottom: 10px;
-    color: #FFFFFF;
+    color: #ffffff;
   }
 `;
 
 const List = styled.div`
-  background: #2a2a39;
+  background: #1d1d27;
   padding: 5px 20px;
   border-radius: 10px;
   border: 1px solid #3a3f50;
-  max-height: calc(100vh - 190px);
+  max-height: calc(100vh - 185px);
   overflow-y: auto;
-  box-shadow: 0 4px 8px 0 rgb(0 0 0 / 12%), 0 2px 4px 0 rgb(0 0 0 / 8%);
+  box-shadow: inset 0 4px 8px 0 rgb(0 0 0 / 12%), 0 2px 4px 0 rgb(0 0 0 / 8%);
 
   @media only screen and (max-width: 600px) {
     margin-bottom: 40px;

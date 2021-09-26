@@ -2,9 +2,33 @@ import styled from "@emotion/styled";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import Router from "next/router";
 import React from "react";
-import FlashOnIcon from '@mui/icons-material/FlashOn';
+import FlashOnIcon from "@mui/icons-material/FlashOn";
+import { leadZero } from "src/utils/leadZero";
+import ModalPokemonCaught from "src/components/ModalPokemonCaught";
 
 function PokemonDetail({ pokemon }) {
+  const [isCatching, setIsCatching] = React.useState(false);
+  const [catched, setCatched] = React.useState(false);
+
+  function catchPokemon() {
+    setIsCatching(true);
+    setTimeout(() => {
+      const stat = Math.random() > 0.5;
+
+      if (stat) {
+        setCatched(true);
+      } else {
+        console.log("failed")
+      }
+
+      setIsCatching(false);
+    }, 2000);
+  }
+
+  function handleClose() {
+    setCatched(false);
+  }
+
   return (
     <Detail>
       <div className="info">
@@ -12,30 +36,42 @@ function PokemonDetail({ pokemon }) {
           <ArrowBackIosIcon />
         </div>
         <div>
-          <div className="title">#{pokemon.id}</div>
-          <div className="id">{pokemon.name}</div>
+          <div className="id">#{leadZero(pokemon.id, 3)}</div>
+          <div className="title">{pokemon.name}</div>
         </div>
       </div>
 
       <div className="image">
-        <img
-          src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemon?.id}.svg`}
-        />
+        {isCatching ? (
+          <img className="balls" src="/pokeball2.png" />
+        ) : (
+          <img
+            className="pokemon"
+            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemon?.id}.svg`}
+          />
+        )}
       </div>
 
-      <Catch onClick={() => Router.back()}>
-        <button className="btn">
-          <FlashOnIcon className="btn-icon" />
-          Catch Pokemon
-        </button>
+      <Catch onClick={() => catchPokemon()}>
+        {isCatching ? (
+          <div className="catcing">Catching ...</div>
+        ) : (
+          <button className="btn" disabled={isCatching}>
+            <FlashOnIcon className="btn-icon" />
+            {!isCatching ? "Catch Pokemon" : "Catching"}
+          </button>
+        )}
       </Catch>
+
+      <ModalPokemonCaught open={catched} close={handleClose} />
     </Detail>
   );
 }
 
 const Detail = styled.div`
   width: 100%;
-  
+  max-height: calc(100vh - 260px);
+
   .info {
     margin-bottom: 30px;
     display: flex;
@@ -56,13 +92,14 @@ const Detail = styled.div`
       }
     }
 
-    .title {
+    .id {
+      font-weight: bold;
       font-size: 20px;
       margin: 0px;
       color: white;
     }
 
-    .id {
+    .title {
       font-size: 30px;
       font-weight: bold;
       color: white;
@@ -74,19 +111,39 @@ const Detail = styled.div`
     justify-content: center;
     align-items: center;
     margin-bottom: 50px;
-    animation: float 3s ease-out infinite;
-    filter: drop-shadow(0 0 0.75rem crimson);
 
     img {
-      height: calc(100vh - 260px);
+      height: 350px;
       padding: 20px;
-      width: 100%;
+      max-width: 100%;
     }
 
     @media only screen and (max-width: 600px) {
       img {
         height: 300px;
-        width: 100%;
+        max-width: 100%;
+      }
+    }
+
+    .pokemon {
+      animation: float 3s ease-out infinite;
+      filter: drop-shadow(0 0 0.75rem crimson);
+    }
+
+    .balls {
+      filter: unset;
+      animation: unset;
+      -webkit-animation: lds-dual-ring 0.4s linear infinite;
+      -moz-animation: lds-dual-ring 0.4s linear infinite;
+      animation: lds-dual-ring 0.4s linear infinite;
+    }
+
+    @keyframes lds-dual-ring {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
       }
     }
   }
@@ -117,6 +174,13 @@ const Catch = styled.div`
     }
   }
 
+  .catcing {
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 800;
+    padding: 10px 0px;
+  }
+
   .btn {
     color: white;
     padding: 10px 30px;
@@ -134,7 +198,12 @@ const Catch = styled.div`
     transition: 0.3s;
 
     &:hover {
-      background: #035edc;
+      background: yellow;
+      color: #000000;
+    }
+
+    &::disabled {
+      background: #212121;
     }
 
     .btn-icon {

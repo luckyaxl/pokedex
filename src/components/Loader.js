@@ -4,7 +4,7 @@ import styled from "@emotion/styled";
 function Loader() {
   return (
     <Loading>
-      <img alt=".." src="/pokeball.png" width="100" className="loads" />
+      <img alt=".." src="/pokeball2.png" width="100" className="loads" />
     </Loading>
   );
 }
@@ -23,9 +23,9 @@ const Loading = styled.div`
     position: absolute;
     top: 45%;
     left: 45%;
-    -webkit-animation: lds-dual-ring 1s linear infinite;
-    -moz-animation: lds-dual-ring 1s linear infinite;
-    animation: lds-dual-ring 1s linear infinite;
+    -webkit-animation: lds-dual-ring 0.5s linear infinite;
+    -moz-animation: lds-dual-ring 0.5s linear infinite;
+    animation: lds-dual-ring 0.5s linear infinite;
   }
 
   @keyframes lds-dual-ring {
