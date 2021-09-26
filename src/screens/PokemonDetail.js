@@ -8,18 +8,19 @@ import PokemonDetailCard from "src/components/PokemonDetailCard";
 import { usePokemonQuery } from "src/hooks/usePokemon";
 import MetaTags from "src/utils/metaTags";
 import { capitalize } from "src/utils/leadZero";
+import Empty from "src/components/Empty";
 
 function PokemonDetail({ name }) {
-  const { error, loading, data } = usePokemonQuery({
+  const { loading, data } = usePokemonQuery({
     variables: {
       name,
     },
     fetchPolicy: "no-cache",
   });
 
-  if (error) return "no data";
-
   if (loading) return <Loader />;
+
+  if (!data.pokemon.name) return <Empty />;
 
   const pokemonName = capitalize(data.pokemon.name);
 

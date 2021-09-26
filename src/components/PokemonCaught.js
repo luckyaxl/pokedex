@@ -1,17 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useLayoutEffect } from "react";
 import styled from "@emotion/styled";
 import clsx from "clsx";
 
 function PokemonCaught() {
   const [isScroll, setIsScroll] = useState(false);
 
-  React.useEffect(() => {
+  useLayoutEffect(() => {
     window.onscroll = function (e) {
       if (window.scrollY > 130) {
         setIsScroll(true);
       } else {
         setIsScroll(false);
       }
+    };
+
+    return () => {
+      window.removeEventListener("scroll");
     };
   });
 

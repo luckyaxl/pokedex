@@ -9,17 +9,14 @@ import PokemonCard from "src/components/PokemonCard";
 import MetaTags from "src/utils/metaTags";
 
 function PokemonDetail() {
-  const mypokemons = [
-    {
-      name: "ivysaur",
-      id: 2,
-      nickname: "saurmas",
-    },
-  ];
+  const mypokemons =
+    (typeof window !== "undefined" &&
+      JSON.parse(localStorage.getItem("mypokemons"))) ||
+    [];
 
   return (
     <Container>
-      <MetaTags title="My Pokemons"/>
+      <MetaTags title="My Pokemons" />
       <NavBar title="My Pokemons" />
       <Header>
         <div className="info layout">

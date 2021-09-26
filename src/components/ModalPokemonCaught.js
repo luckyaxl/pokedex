@@ -1,9 +1,34 @@
+import React, { useState } from "react";
 import Dialog from "@mui/material/Dialog";
 import styled from "@emotion/styled";
 import Convetti from "react-confetti";
 import Button from "src/components/Button";
+import Slide from '@mui/material/Slide';
 
-export default function AlertDialog({ open, close }) {
+export default function AlertDialog({ open, close, data }) {
+  const [nickname, setNickname] = useState("");
+
+  const changeNickName = async (e) => {
+    setNickname(e.target.value);
+  };
+
+  const handleSave = async (e) => {
+    e.preventDefault();
+    let arr = JSON.parse(localStorage.getItem("mypokemons")) || [];
+
+    let save = {
+      ...data,
+      nickname,
+    };
+
+    arr.push(save);
+
+    const obj = JSON.stringify(arr);
+    await localStorage.setItem("mypokemons", obj);
+    setNickname("");
+    close();
+  };
+
   return (
     <div>
       {open && (
@@ -14,27 +39,41 @@ export default function AlertDialog({ open, close }) {
         onClose={close}
         fullWidth
         maxWidth="xs"
-        transitionDuration={0}
+        
+        TransitionComponent={Slide}
         PaperProps={{
           className: "main",
-        }}
-      >
-        <div className="content">
-          <h3>Gotcha !!!</h3>
-          <div className="form">
-            <img src="/pokeball.png" alt=".." height="30" />
-            <input autoFocus placeholder="Nickname" />
+        }}>
+        <form onSubmit={handleSave}>
+          <div className="content">
+            <div className="title">
+              <h3>Gotcha !!!</h3>
+              <small>You caught {data.name}</small>
+            </div>
+            <div className="form">
+              <img src="/pokeball.png" alt=".." height="30" />
+              <input
+                required
+                autoFocus
+                placeholder={`Nickname for ${data.name}`}
+                type="text"
+                value={nickname}
+                onChange={changeNickName}
+              />
+            </div>
           </div>
-        </div>
 
-        <div className="actions">
-          <div className="box">
-            <Button onClick={close}>Release</Button>
+          <div className="actions">
+            <div className="box">
+              <Button bg="red" onClick={close}>
+                Release
+              </Button>
+            </div>
+            <div className="box">
+              <Button type="submit">Save</Button>
+            </div>
           </div>
-          <div className="box">
-            <Button>Save</Button>
-          </div>
-        </div>
+        </form>
       </PokemonDialog>
     </div>
   );
@@ -52,9 +91,17 @@ const PokemonDialog = styled(Dialog)`
     .content {
       margin-bottom: 15px;
 
-      h3 {
-        margin-top: 0px;
-        margin-bottom: 10px;
+      .title {
+        h3 {
+          margin-top: 0px;
+          margin-bottom: 0px;
+        }
+
+        small {
+          font-size: 14px;
+          color: #d1d1d1;
+        }
+        margin-bottom: 14px;
       }
 
       .form {
@@ -67,7 +114,7 @@ const PokemonDialog = styled(Dialog)`
 
         input {
           outline: none;
-          border-radius: 5px;
+          border-radius: 10px;
           border: 1px solid #3a3f50;
           padding: 20px 20px;
           height: 32px;
@@ -80,7 +127,7 @@ const PokemonDialog = styled(Dialog)`
     }
 
     .actions {
-      align-self: flex-end;
+      float: right;
       display: flex;
 
       .box {

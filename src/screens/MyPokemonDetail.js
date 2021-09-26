@@ -1,25 +1,26 @@
 import Grid from "@mui/material/Grid";
 import React from "react";
 import Container from "src/components/Container";
-import { usePokemonQuery } from "src/hooks/usePokemon";
+import Empty from "src/components/Empty";
+import Loader from "src/components/Loader";
+import NavBar from "src/components/NavBar";
 import Detail from "src/components/PokemonDetail";
 import PokemonDetailCard from "src/components/PokemonDetailCard";
-import NavBar from "src/components/NavBar";
-import Loader from "src/components/Loader";
-import MetaTags from "src/utils/metaTags";
+import { usePokemonQuery } from "src/hooks/usePokemon";
 import { capitalize } from "src/utils/leadZero";
+import MetaTags from "src/utils/metaTags";
 
 function PokemonDetail({ name }) {
-  const { error, loading, data } = usePokemonQuery({
+  const { loading, data } = usePokemonQuery({
     variables: {
       name,
     },
     fetchPolicy: "no-cache",
   });
 
-  if (error) return "no data";
-
   if (loading) return <Loader />;
+
+  if (!data.pokemon.name) return <Empty />;
 
   const pokemonName = capitalize(data.pokemon.name);
 

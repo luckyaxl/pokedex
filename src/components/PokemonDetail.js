@@ -1,15 +1,15 @@
 import styled from "@emotion/styled";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import Router from "next/router";
-import React from "react";
-import FlashOnIcon from "@mui/icons-material/FlashOn";
-import { capitalize, leadZero } from "src/utils/leadZero";
-import ModalPokemonCaught from "src/components/ModalPokemonCaught";
 import CatchingPokemonIcon from "@mui/icons-material/CatchingPokemon";
+import Router from "next/router";
+import React, { useState } from "react";
+import ModalPokemonCaught from "src/components/ModalPokemonCaught";
+import { capitalize, leadZero } from "src/utils/leadZero";
 
 function PokemonDetail({ pokemon, owned }) {
-  const [isCatching, setIsCatching] = React.useState(false);
-  const [catched, setCatched] = React.useState(false);
+  const [isCatching, setIsCatching] = useState(false);
+  const [catched, setCatched] = useState(false);
+  const [fail, setFail] = useState(false);
 
   function catchPokemon() {
     setIsCatching(true);
@@ -19,12 +19,26 @@ function PokemonDetail({ pokemon, owned }) {
       if (stat) {
         setCatched(true);
       } else {
-        console.log("failed");
+        setFail(true);
+
+        setTimeout(() => {
+          setFail(false);
+        }, 1000);
       }
 
       setIsCatching(false);
     }, 2000);
   }
+
+  const releasePokemon = () => {
+    let obj = JSON.parse(localStorage.getItem("mypokemons"));
+    const arr = obj.filter(function (item) {
+      return item.name !== pokemon.name;
+    });
+
+    localStorage.setItem("mypokemons", JSON.stringify(arr));
+    Router.back();
+  };
 
   function handleClose() {
     setCatched(false);
@@ -58,10 +72,12 @@ function PokemonDetail({ pokemon, owned }) {
         {isCatching ? (
           <div className="catcing">Catching ...</div>
         ) : owned ? (
-          <button className="btn red">
+          <button className="btn red" onClick={() => releasePokemon()}>
             <CatchingPokemonIcon className="btn-icon" />
             Release
           </button>
+        ) : fail ? (
+          <div className="catcing helper">Catch Failed!! Don't give up</div>
         ) : (
           <button className="btn" onClick={() => catchPokemon()}>
             <CatchingPokemonIcon className="btn-icon" />
@@ -70,7 +86,7 @@ function PokemonDetail({ pokemon, owned }) {
         )}
       </Catch>
 
-      <ModalPokemonCaught open={catched} close={handleClose} />
+      <ModalPokemonCaught open={catched} close={handleClose} data={pokemon} />
     </Detail>
   );
 }
@@ -167,6 +183,8 @@ const Detail = styled.div`
 const Catch = styled.div`
   position: relative;
   width: 100%;
+  display: flex;
+  justify-content: center;
 
   @media only screen and (max-width: 600px) {
     width: 100%;
@@ -223,6 +241,10 @@ const Catch = styled.div`
 
   .red {
     background: red;
+  }
+
+  .helper {
+    color: red;
   }
 `;
 

@@ -9,7 +9,7 @@ function MetaTags({ title = "Pokemon" }) {
       <meta name="description" content="Pokomens Character" />
       <meta name="keywords" content="pokemon" />
       <meta name="robots" content="index, follow" />
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
     </Head>
   );
 }
