@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "@emotion/styled";
-import clsx from 'clsx'
+import clsx from "clsx";
 
 function PokemonCaught() {
   const [isScroll, setIsScroll] = useState(false);

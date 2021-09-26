@@ -17,7 +17,7 @@ const PokeBall = styled.div`
   transition: 100ms;
 
   &:hover {
-    transform: scale(0.9)
+    transform: scale(0.9);
   }
 `;
 

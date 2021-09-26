@@ -13,9 +13,14 @@ function PokemonList() {
 
   return (
     <Container>
-      <PokemonCaught  />
+      <PokemonCaught />
 
-      <InfiniteScroll initialLoad={false} loadMore={loadMore} hasMore={hasMore} loader={"loading"}>
+      <InfiniteScroll
+        initialLoad={false}
+        loadMore={loadMore}
+        hasMore={hasMore}
+        loader={"loading"}
+      >
         <Grid container spacing={2}>
           {pokemons.map((item, i) => (
             <PokemonCard data={item} key={i} />

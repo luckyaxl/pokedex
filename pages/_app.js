@@ -4,7 +4,6 @@ import { PokemonProvider } from "src/contexts/PokemonContext";
 import "src/styles/globals.css";
 import client from "src/utils/apolloClient";
 
-
 function MyApp({ Component, pageProps }) {
   return (
     <ApolloProvider client={client}>

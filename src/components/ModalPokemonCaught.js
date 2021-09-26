@@ -7,10 +7,7 @@ export default function AlertDialog({ open, close }) {
   return (
     <div>
       {open && (
-        <Convetti
-          width={window.innerWidth}
-          height={window.innerHeight}
-        />
+        <Convetti width={window.innerWidth} height={window.innerHeight} />
       )}
       <PokemonDialog
         open={open}
@@ -20,8 +17,8 @@ export default function AlertDialog({ open, close }) {
         transitionDuration={0}
         PaperProps={{
           className: "main",
-        }}>
-
+        }}
+      >
         <div className="content">
           <h3>Gotcha !!!</h3>
           <div className="form">
@@ -38,7 +35,6 @@ export default function AlertDialog({ open, close }) {
             <Button>Save</Button>
           </div>
         </div>
-        
       </PokemonDialog>
     </div>
   );

@@ -36,5 +36,9 @@ export function PokemonProvider({ children }) {
     }
   }, [data]);
 
-  return <PokemonContext.Provider value={{ pokemons, hasMore, loadMore }}>{children}</PokemonContext.Provider>;
+  return (
+    <PokemonContext.Provider value={{ pokemons, hasMore, loadMore }}>
+      {children}
+    </PokemonContext.Provider>
+  );
 }

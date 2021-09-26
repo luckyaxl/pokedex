@@ -18,7 +18,7 @@ function PokemonDetail({ pokemon }) {
       if (stat) {
         setCatched(true);
       } else {
-        console.log("failed")
+        console.log("failed");
       }
 
       setIsCatching(false);

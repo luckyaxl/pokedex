@@ -12,7 +12,7 @@ function PokemonDetail() {
     {
       name: "ivysaur",
       id: 2,
-      nickname: "saurmas"
+      nickname: "saurmas",
     },
   ];
 
@@ -41,7 +41,7 @@ function PokemonDetail() {
 
 const Header = styled.div`
   @media only screen and (max-width: 600px) {
-    display: none
+    display: none;
   }
 
   .info {
