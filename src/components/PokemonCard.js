@@ -20,7 +20,7 @@ function PokemonCard({ data, index, owned }) {
 
             <div className="img">
               <Image
-                unoptimized={process.env.ENVIRONMENT !== "PRODUCTION"}
+                unoptimized={process.env.NODE_ENV !== "production"}
                 alt="..."
                 layout="fill"
                 src={
