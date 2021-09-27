@@ -1,14 +1,14 @@
 import Grid from "@mui/material/Grid";
 import React from "react";
 import Container from "src/components/Container";
+import Empty from "src/components/Empty";
 import Loader from "src/components/Loader";
+import MetaTags from "src/components/MetaTags";
 import NavBar from "src/components/NavBar";
 import Detail from "src/components/PokemonDetail";
 import PokemonDetailCard from "src/components/PokemonDetailCard";
 import { usePokemonQuery } from "src/hooks/usePokemon";
-import MetaTags from "src/utils/metaTags";
 import { capitalize } from "src/utils/leadZero";
-import Empty from "src/components/Empty";
 
 function PokemonDetail({ name }) {
   const { loading, data } = usePokemonQuery({

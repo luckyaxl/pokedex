@@ -3,10 +3,13 @@ import Grid from "@mui/material/Grid";
 import styled from "@emotion/styled";
 import { capitalize, leadZero } from "src/utils/leadZero";
 
-function PokemonCard({ data, owned }) {
+function PokemonCard({ data, index, owned }) {
   return (
     <Grid item lg={2} md={3} sm={6} xs={6}>
-      <Link href={owned ? `/mypokemons/${data.name}` : `/${data.name}`} passHref>
+      <Link
+        href={owned ? `/mypokemons/${index}/${data.name}` : `/${data.name}`}
+        passHref
+      >
         <Card>
           <div className="id">
             <small>#{leadZero(data.id, 3)}</small>
@@ -44,8 +47,6 @@ const Card = styled.div`
   cursor: pointer;
   width: 100%;
   padding: 15px;
-  user-select: none;
-  transition: 0.2s;
   user-select: none;
 
   &:hover {

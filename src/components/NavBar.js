@@ -1,8 +1,7 @@
 import styled from "@emotion/styled";
-
-import React from "react";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import Router from "next/router";
+import React from "react";
 
 function AppBar({ title }) {
   return (

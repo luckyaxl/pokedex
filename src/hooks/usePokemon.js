@@ -1,5 +1,5 @@
-import gql from "graphql-tag";
 import { useQuery } from "@apollo/client";
+import gql from "graphql-tag";
 
 export const POKEMON_QUERY = gql`
   query pokemon($name: String!) {

@@ -3,11 +3,11 @@ import Link from "next/link";
 import React, { useContext } from "react";
 import InfiniteScroll from "react-infinite-scroller";
 import Container from "src/components/Container";
-import PokemonCard from "src/components/PokemonCard";
+import MetaTags from "src/components/MetaTags";
 import PokemonBall from "src/components/PokemonBall";
-import { PokemonContext } from "src/contexts/PokemonContext";
+import PokemonCard from "src/components/PokemonCard";
 import PokemonCaught from "src/components/PokemonCaught";
-import MetaTags from "src/utils/metaTags";
+import { PokemonContext } from "src/contexts/PokemonContext";
 
 function PokemonList() {
   const { pokemons, hasMore, loadMore } = useContext(PokemonContext);

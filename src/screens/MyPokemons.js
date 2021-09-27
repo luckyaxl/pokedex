@@ -2,17 +2,15 @@ import styled from "@emotion/styled";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import Grid from "@mui/material/Grid";
 import Router from "next/router";
-import React from "react";
+import React, { useContext } from "react";
 import Container from "src/components/Container";
+import MetaTags from "src/components/MetaTags";
 import NavBar from "src/components/NavBar";
 import PokemonCard from "src/components/PokemonCard";
-import MetaTags from "src/utils/metaTags";
+import { PokemonContext } from "src/contexts/PokemonContext";
 
 function PokemonDetail() {
-  const mypokemons =
-    (typeof window !== "undefined" &&
-      JSON.parse(localStorage.getItem("mypokemons"))) ||
-    [];
+  const { myPokemons } = useContext(PokemonContext);
 
   return (
     <Container>
@@ -25,13 +23,13 @@ function PokemonDetail() {
           </div>
           <div>
             <div className="title">My Pokemons</div>
-            <div className="caught">{mypokemons.length} Pokemons Caught</div>
+            <div className="caught">{myPokemons.length} Pokemons Caught</div>
           </div>
         </div>
       </Header>
       <Grid container spacing={2} className="layout">
-        {mypokemons.map((item, i) => (
-          <PokemonCard data={item} key={i} owned={true} />
+        {myPokemons.map((item, i) => (
+          <PokemonCard data={item} key={i} owned={true} index={i} />
         ))}
       </Grid>
     </Container>

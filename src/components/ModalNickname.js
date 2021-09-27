@@ -1,11 +1,13 @@
-import React, { useState } from "react";
-import Dialog from "@mui/material/Dialog";
 import styled from "@emotion/styled";
+import Dialog from "@mui/material/Dialog";
+import Slide from "@mui/material/Slide";
+import React, { useContext, useState } from "react";
 import Convetti from "react-confetti";
 import Button from "src/components/Button";
-import Slide from '@mui/material/Slide';
+import { PokemonContext } from "src/contexts/PokemonContext";
 
-export default function AlertDialog({ open, close, data }) {
+export default function ModalNickname({ open, data }) {
+  const { savePokemon, setOpenModal } = useContext(PokemonContext);
   const [nickname, setNickname] = useState("");
 
   const changeNickName = async (e) => {
@@ -14,19 +16,19 @@ export default function AlertDialog({ open, close, data }) {
 
   const handleSave = async (e) => {
     e.preventDefault();
-    let arr = JSON.parse(localStorage.getItem("mypokemons")) || [];
 
-    let save = {
+    const pokemonData = {
       ...data,
       nickname,
     };
 
-    arr.push(save);
-
-    const obj = JSON.stringify(arr);
-    await localStorage.setItem("mypokemons", obj);
+    savePokemon(pokemonData);
     setNickname("");
-    close();
+    setOpenModal(false);
+  };
+
+  const handleClose = () => {
+    setOpenModal(false);
   };
 
   return (
@@ -36,14 +38,14 @@ export default function AlertDialog({ open, close, data }) {
       )}
       <PokemonDialog
         open={open}
-        onClose={close}
+        onClose={handleClose}
         fullWidth
         maxWidth="xs"
-        
         TransitionComponent={Slide}
         PaperProps={{
           className: "main",
-        }}>
+        }}
+      >
         <form onSubmit={handleSave}>
           <div className="content">
             <div className="title">
@@ -51,10 +53,9 @@ export default function AlertDialog({ open, close, data }) {
               <small>You caught {data.name}</small>
             </div>
             <div className="form">
-              <img src="/pokeball.png" alt=".." height="30" />
+              <img src="/pokeball.png" alt=".." height="30" className="balls" />
               <input
                 required
-                autoFocus
                 placeholder={`Nickname for ${data.name}`}
                 type="text"
                 value={nickname}
@@ -65,7 +66,7 @@ export default function AlertDialog({ open, close, data }) {
 
           <div className="actions">
             <div className="box">
-              <Button bg="red" onClick={close}>
+              <Button type="button" bg="red" onClick={handleClose}>
                 Release
               </Button>
             </div>
@@ -110,6 +111,21 @@ const PokemonDialog = styled(Dialog)`
 
         img {
           margin-right: 10px;
+        }
+
+        .balls {
+          -webkit-animation: spin 3s linear infinite;
+          -moz-animation: spin 3s linear infinite;
+          animation: spin 3s linear infinite;
+        }
+
+        @keyframes spin {
+          0% {
+            transform: rotate(0deg);
+          }
+          100% {
+            transform: rotate(360deg);
+          }
         }
 
         input {

@@ -2,47 +2,20 @@ import styled from "@emotion/styled";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import CatchingPokemonIcon from "@mui/icons-material/CatchingPokemon";
 import Router from "next/router";
-import React, { useState } from "react";
-import ModalPokemonCaught from "src/components/ModalPokemonCaught";
+import React, { useContext } from "react";
+import ModalNickname from "src/components/ModalNickname";
+import { PokemonContext } from "src/contexts/PokemonContext";
 import { capitalize, leadZero } from "src/utils/leadZero";
 
-function PokemonDetail({ pokemon, owned }) {
-  const [isCatching, setIsCatching] = useState(false);
-  const [catched, setCatched] = useState(false);
-  const [fail, setFail] = useState(false);
-
-  function catchPokemon() {
-    setIsCatching(true);
-    setTimeout(() => {
-      const stat = Math.random() > 0.5;
-
-      if (stat) {
-        setCatched(true);
-      } else {
-        setFail(true);
-
-        setTimeout(() => {
-          setFail(false);
-        }, 1000);
-      }
-
-      setIsCatching(false);
-    }, 2000);
-  }
-
-  const releasePokemon = () => {
-    let obj = JSON.parse(localStorage.getItem("mypokemons"));
-    const arr = obj.filter(function (item) {
-      return item.name !== pokemon.name;
-    });
-
-    localStorage.setItem("mypokemons", JSON.stringify(arr));
-    Router.back();
-  };
-
-  function handleClose() {
-    setCatched(false);
-  }
+function PokemonDetail({ pokemon, id, owned }) {
+  const {
+    catchPokemon,
+    releasePokemon,
+    isCatching,
+    fail,
+    openModal,
+    myPokemons,
+  } = useContext(PokemonContext);
 
   return (
     <Detail>
@@ -52,13 +25,18 @@ function PokemonDetail({ pokemon, owned }) {
         </div>
         <div>
           <div className="id">#{leadZero(pokemon.id, 3)}</div>
-          <div className="title">{capitalize(pokemon.name)}</div>
+          <div className="title">
+            {capitalize(pokemon.name)}{" "}
+            <span className="nickname">
+              {id && `[${myPokemons[id]?.nickname}]`}
+            </span>
+          </div>
         </div>
       </div>
 
       <div className="image">
         {isCatching ? (
-          <img alt=".." className="balls" src="/pokeball2.png" />
+          <img alt=".." className="balls" src="/pokeball.png" />
         ) : (
           <img
             alt=".."
@@ -72,12 +50,12 @@ function PokemonDetail({ pokemon, owned }) {
         {isCatching ? (
           <div className="catcing">Catching ...</div>
         ) : owned ? (
-          <button className="btn red" onClick={() => releasePokemon()}>
+          <button className="btn red" onClick={() => releasePokemon(id)}>
             <CatchingPokemonIcon className="btn-icon" />
             Release
           </button>
         ) : fail ? (
-          <div className="catcing helper">Catch Failed!! Don't give up</div>
+          <div className="catcing helper">Catch Failed!! Don&#39;t give up</div>
         ) : (
           <button className="btn" onClick={() => catchPokemon()}>
             <CatchingPokemonIcon className="btn-icon" />
@@ -86,7 +64,7 @@ function PokemonDetail({ pokemon, owned }) {
         )}
       </Catch>
 
-      <ModalPokemonCaught open={catched} close={handleClose} data={pokemon} />
+      <ModalNickname open={openModal} data={pokemon} />
     </Detail>
   );
 }
@@ -127,6 +105,11 @@ const Detail = styled.div`
       font-weight: bold;
       color: white;
     }
+
+    .nickname {
+      color: yellow;
+      font-size: 16px;
+    }
   }
 
   .image {
@@ -158,12 +141,12 @@ const Detail = styled.div`
     .balls {
       filter: unset;
       animation: unset;
-      -webkit-animation: lds-dual-ring 0.4s linear infinite;
-      -moz-animation: lds-dual-ring 0.4s linear infinite;
-      animation: lds-dual-ring 0.4s linear infinite;
+      -webkit-animation: spin 0.4s linear infinite;
+      -moz-animation: spin 0.4s linear infinite;
+      animation: spin 0.4s linear infinite;
     }
 
-    @keyframes lds-dual-ring {
+    @keyframes spin {
       0% {
         transform: rotate(0deg);
       }

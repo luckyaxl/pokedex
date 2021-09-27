@@ -1,28 +1,24 @@
-import React from "react";
 import styled from "@emotion/styled";
+import React from "react";
 
 function Loader() {
   return (
     <Loading>
-      <img alt=".." src="/pokeball2.png" width="100" className="loads" />
+      <img alt=".." src="/pokeball.png" width="100" className="loads" />
     </Loading>
   );
 }
 
 const Loading = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
   z-index: 9999;
-  width: 100vw;
-  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: #242735;
-  transition: opacity 0.2s;
 
   .loads {
     position: absolute;
-    top: 45%;
-    left: 45%;
+    top: 40%;
     -webkit-animation: lds-dual-ring 0.5s linear infinite;
     -moz-animation: lds-dual-ring 0.5s linear infinite;
     animation: lds-dual-ring 0.5s linear infinite;
