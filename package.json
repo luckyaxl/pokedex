@@ -1,6 +1,6 @@
 {
-  "name": "pokepedia",
-  "version": "0.1.0",
+  "name": "pokester",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -9,6 +9,14 @@
     "lint": "next lint",
     "format": "prettier --write **/*.{js,jsx,ts,tsx,css,md,json} --config ./.prettierrc"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/luckyaxl/pokester"
+  },
+  "keywords": [
+    "pokemon"
+  ],
+  "author": "Lucky Kusuma <luckyaxl@gmail.com>",
   "dependencies": {
     "@apollo/client": "^3.4.13",
     "@apollo/react-hooks": "^4.0.0",
