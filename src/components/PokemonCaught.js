@@ -2,25 +2,41 @@ import styled from "@emotion/styled";
 import clsx from "clsx";
 import React, { useContext, useEffect, useState } from "react";
 import { PokemonContext } from "src/contexts/PokemonContext";
+import NextImage from "next/image";
+import pokemonLogo from "public/pokemon-logo.png";
 
 function PokemonCaught() {
-  const [isScroll, setIsScroll] = useState(false);
+  const [state, setState] = useState({
+    prevScrollpos: window.pageYOffset,
+    isScroll: false,
+  });
+
+  const { prevScrollpos, isScroll } = state;
   const { myPokemons, count } = useContext(PokemonContext);
 
+  const handleScroll = () => {
+    const currentScrollPos = window.pageYOffset;
+    const visible = prevScrollpos < currentScrollPos;
+    setState({ isScroll: visible, prevScrollpos: currentScrollPos });
+  };
+
   useEffect(() => {
-    window.onscroll = function (e) {
-      if (window.scrollY > 130) {
-        setIsScroll(true);
-      } else {
-        setIsScroll(false);
-      }
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
     };
   });
 
   return (
     <TotalCard>
       <div className="card">
-        <img src="/pokemon-logo.png" alt=".." height="90" />
+        <NextImage
+          src={pokemonLogo}
+          alt="Pokemon Logo"
+          width={300}
+          height={120}
+        />
+
         <div className="box">
           <div className="caught">
             <span>Caught</span>
@@ -64,20 +80,23 @@ const TotalCard = styled.div`
     user-select: none;
     user-select: none;
     margin-bottom: 15px;
+    min-height: 260px;
 
     .box {
+      margin-top: 20px;
       width: 200px;
     }
-  }
 
-  img {
-    margin-bottom: 30px;
+    .image {
+      height: 50px;
+      margin-bottom: 30px;
+    }
   }
 
   .card-fixed {
     display: none;
-    margin-bottom: 20px;
-    bottom: 0;
+    top: 0;
+    margin-top: 50px;
     width: 200px;
     position: fixed;
     left: 0;
@@ -113,7 +132,7 @@ const TotalCard = styled.div`
   }
 
   @media only screen and (max-width: 600px) {
-    img {
+    .image {
       width: 100%;
       height: auto;
     }

@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import CatchingPokemonIcon from "@mui/icons-material/CatchingPokemon";
+import Image from "next/image";
 import Router from "next/router";
 import React, { useContext } from "react";
 import ModalNickname from "src/components/ModalNickname";
@@ -34,13 +35,20 @@ function PokemonDetail({ pokemon, id, owned }) {
         </div>
       </div>
 
-      <div className="image">
+      <div className="image pokemon">
         {isCatching ? (
-          <img alt=".." className="balls" src="/pokeball.png" />
-        ) : (
-          <img
+          <Image
             alt=".."
-            className="pokemon"
+            width={350}
+            height={350}
+            className="balls"
+            src="/pokeball2.png"
+          />
+        ) : (
+          <Image
+            alt="pokemon"
+            width={350}
+            height={350}
             src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemon?.id}.svg`}
           />
         )}
@@ -57,7 +65,7 @@ function PokemonDetail({ pokemon, id, owned }) {
         ) : fail ? (
           <div className="catcing helper">Catch Failed!! Don&#39;t give up</div>
         ) : (
-          <button className="btn" onClick={() => catchPokemon()}>
+          <button className="btn" onClick={catchPokemon}>
             <CatchingPokemonIcon className="btn-icon" />
             {!isCatching ? "Catch Pokemon" : "Catching"}
           </button>
@@ -116,43 +124,30 @@ const Detail = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
     margin-bottom: 50px;
+  }
 
-    img {
-      height: 350px;
-      padding: 20px;
-      width: auto;
-      max-width: 100%;
+  .pokemon {
+    position: relative;
+    animation: float 3s ease-out infinite;
+    filter: drop-shadow(0 0 0.75rem crimson);
+  }
+
+  .balls {
+    filter: unset;
+    animation: unset;
+    -webkit-animation: spin 0.4s linear infinite;
+    -moz-animation: spin 0.4s linear infinite;
+    animation: spin 0.4s linear infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
     }
-
-    @media only screen and (max-width: 600px) {
-      img {
-        height: 300px;
-        width: auto;
-        max-width: 100%;
-      }
-    }
-
-    .pokemon {
-      animation: float 3s ease-out infinite;
-      filter: drop-shadow(0 0 0.75rem crimson);
-    }
-
-    .balls {
-      filter: unset;
-      animation: unset;
-      -webkit-animation: spin 0.4s linear infinite;
-      -moz-animation: spin 0.4s linear infinite;
-      animation: spin 0.4s linear infinite;
-    }
-
-    @keyframes spin {
-      0% {
-        transform: rotate(0deg);
-      }
-      100% {
-        transform: rotate(360deg);
-      }
+    100% {
+      transform: rotate(360deg);
     }
   }
 

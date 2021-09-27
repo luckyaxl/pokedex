@@ -2,38 +2,42 @@ import Link from "next/link";
 import Grid from "@mui/material/Grid";
 import styled from "@emotion/styled";
 import { capitalize, leadZero } from "src/utils/leadZero";
+import Image from "next/image";
+import Grow from "@mui/material/Grow";
 
 function PokemonCard({ data, index, owned }) {
   return (
-    <Grid item lg={2} md={3} sm={6} xs={6}>
-      <Link
-        href={owned ? `/mypokemons/${index}/${data.name}` : `/${data.name}`}
-        passHref
-      >
-        <Card>
-          <div className="id">
-            <small>#{leadZero(data.id, 3)}</small>
-          </div>
+    <Grow in={true}>
+      <Grid item lg={2} md={3} sm={6} xs={6}>
+        <Link
+          href={owned ? `/mypokemons/${index}/${data.name}` : `/${data.name}`}
+          passHref
+        >
+          <Card>
+            <div className="id">
+              <small>#{leadZero(data.id, 3)}</small>
+            </div>
 
-          <div className="img">
-            <img
-              alt="..."
-              height="100%"
-              width="100%"
-              src={
-                data?.dreamworld ||
-                `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${data.id}.svg`
-              }
-            />
-          </div>
+            <div className="img">
+              <Image
+                unoptimized={process.env.ENVIRONMENT !== "PRODUCTION"}
+                alt="..."
+                layout="fill"
+                src={
+                  data?.dreamworld ||
+                  `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${data.id}.svg`
+                }
+              />
+            </div>
 
-          <div className="info">
-            <div className="name">{capitalize(data.name)}</div>
-            <div className="nickname">{data.nickname}</div>
-          </div>
-        </Card>
-      </Link>
-    </Grid>
+            <div className="info">
+              <div className="name">{capitalize(data.name)}</div>
+              <div className="nickname">{data.nickname}</div>
+            </div>
+          </Card>
+        </Link>
+      </Grid>
+    </Grow>
   );
 }
 
@@ -48,6 +52,7 @@ const Card = styled.div`
   width: 100%;
   padding: 15px;
   user-select: none;
+  position: relative;
 
   &:hover {
     box-shadow: 0 4px 10px 0 rgb(0 0 0 / 20%), 0 2px 10px 0 rgb(0 0 0 / 20%);
@@ -89,6 +94,7 @@ const Card = styled.div`
     display: block;
     margin-left: auto;
     margin-right: auto;
+    position: relative;
     filter: drop-shadow(0 0 0.75rem crimson);
   }
 

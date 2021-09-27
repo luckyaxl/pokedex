@@ -1,10 +1,12 @@
 import styled from "@emotion/styled";
 import Dialog from "@mui/material/Dialog";
-import Slide from "@mui/material/Slide";
+import Grow from "@mui/material/Grow";
 import React, { useContext, useState } from "react";
 import Convetti from "react-confetti";
 import Button from "src/components/Button";
 import { PokemonContext } from "src/contexts/PokemonContext";
+import Image from 'next/image'
+import pokeBall from 'public/pokeball.png'
 
 export default function ModalNickname({ open, data }) {
   const { savePokemon, setOpenModal } = useContext(PokemonContext);
@@ -41,7 +43,8 @@ export default function ModalNickname({ open, data }) {
         onClose={handleClose}
         fullWidth
         maxWidth="xs"
-        TransitionComponent={Slide}
+        TransitionComponent={Grow}
+        transitionDuration={200}
         PaperProps={{
           className: "main",
         }}
@@ -53,7 +56,7 @@ export default function ModalNickname({ open, data }) {
               <small>You caught {data.name}</small>
             </div>
             <div className="form">
-              <img src="/pokeball.png" alt=".." height="30" className="balls" />
+              <Image src={pokeBall} alt=".." height={30} width={30} className="balls" />
               <input
                 required
                 placeholder={`Nickname for ${data.name}`}
@@ -109,10 +112,6 @@ const PokemonDialog = styled(Dialog)`
         display: flex;
         align-items: center;
 
-        img {
-          margin-right: 10px;
-        }
-
         .balls {
           -webkit-animation: spin 3s linear infinite;
           -moz-animation: spin 3s linear infinite;
@@ -129,6 +128,7 @@ const PokemonDialog = styled(Dialog)`
         }
 
         input {
+          margin-left: 10px;
           outline: none;
           border-radius: 10px;
           border: 1px solid #3a3f50;
