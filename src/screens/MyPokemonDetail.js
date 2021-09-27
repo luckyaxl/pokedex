@@ -1,12 +1,11 @@
 import Grid from "@mui/material/Grid";
-import React, { useContext } from "react";
 import Container from "src/components/Container";
 import Empty from "src/components/Empty";
 import Loader from "src/components/Loader";
 import MetaTags from "src/components/MetaTags";
 import NavBar from "src/components/NavBar";
-import Detail from "src/components/PokemonDetail";
-import PokemonDetailCard from "src/components/PokemonDetailCard";
+import PokemonImage from "src/components/PokemonImage";
+import PokemonInfo from "src/components/PokemonInfo";
 import { usePokemonQuery } from "src/hooks/usePokemon";
 import { capitalize } from "src/utils/leadZero";
 
@@ -31,10 +30,10 @@ function PokemonDetail({ name, id }) {
 
       <Grid container spacing={2} className="layout">
         <Grid item lg={6} sm={12} xs={12}>
-          <Detail pokemon={data.pokemon} id={id} owned={true} />
+          <PokemonImage pokemon={data.pokemon} id={id} owned={true} />
         </Grid>
         <Grid item lg={6} sm={12} xs={12}>
-          <PokemonDetailCard pokemon={data.pokemon} />
+          <PokemonInfo pokemon={data.pokemon} />
         </Grid>
       </Grid>
     </Container>

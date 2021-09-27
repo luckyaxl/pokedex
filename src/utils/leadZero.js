@@ -6,5 +6,5 @@ export function leadZero(num, size) {
 
 export function capitalize(str) {
   let capital = str.charAt(0).toUpperCase() + str.slice(1);
-  return capital
+  return capital;
 }

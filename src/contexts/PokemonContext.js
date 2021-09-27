@@ -10,44 +10,6 @@ export function PokemonProvider({ children }) {
   const [offset, setOffset] = useState(0);
   const [hasMore, setHasMore] = useState(true);
   const [count, setCount] = useState("");
-  const [isCatching, setIsCatching] = useState(false);
-  const [openModal, setOpenModal] = useState(false);
-  const [fail, setFail] = useState(false);
-
-  const catchPokemon = () => {
-    setIsCatching(true);
-    setTimeout(() => {
-      const stat = Math.random() > 0.5;
-
-      if (stat) {
-        setOpenModal(true);
-      } else {
-        setFail(true);
-
-        setTimeout(() => {
-          setFail(false);
-        }, 1000);
-      }
-
-      setIsCatching(false);
-    }, 2000);
-  };
-
-  const releasePokemon = (index) => {
-    myPokemons.splice(index, 1);
-    localStorage.setItem("mypokemons", JSON.stringify(myPokemons));
-    Router.back();
-  };
-
-  const savePokemon = async (pokemonData) => {
-    let arr = JSON.parse(localStorage.getItem("mypokemons")) || [];
-    arr.push(pokemonData);
-
-    setMypokemons(arr);
-
-    const obj = JSON.stringify(arr);
-    await localStorage.setItem("mypokemons", obj);
-  };
 
   const payload = {
     variables: {
@@ -65,6 +27,21 @@ export function PokemonProvider({ children }) {
         setOffset(data?.pokemons?.nextOffset);
       }, 500);
     }
+  };
+
+  const releasePokemon = (index) => {
+    myPokemons.splice(index, 1);
+    localStorage.setItem("mypokemons", JSON.stringify(myPokemons));
+    Router.back();
+  };
+
+  const savePokemon = async (pokemonData) => {
+    let arr = JSON.parse(localStorage.getItem("mypokemons")) || [];
+    arr.push(pokemonData);
+    const obj = JSON.stringify(arr);
+    await localStorage.setItem("mypokemons", obj);
+
+    await setMypokemons(arr);
   };
 
   useEffect(() => {
@@ -94,11 +71,6 @@ export function PokemonProvider({ children }) {
         hasMore,
         loadMore,
         count,
-        isCatching,
-        openModal,
-        setOpenModal,
-        fail,
-        catchPokemon,
         releasePokemon,
         myPokemons,
         savePokemon,

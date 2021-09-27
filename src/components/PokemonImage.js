@@ -1,22 +1,42 @@
+import React, { useContext, useState } from "react";
 import styled from "@emotion/styled";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import CatchingPokemonIcon from "@mui/icons-material/CatchingPokemon";
 import Image from "next/image";
 import Router from "next/router";
-import React, { useContext } from "react";
 import ModalNickname from "src/components/ModalNickname";
 import { PokemonContext } from "src/contexts/PokemonContext";
 import { capitalize, leadZero } from "src/utils/leadZero";
 
-function PokemonDetail({ pokemon, id, owned }) {
-  const {
-    catchPokemon,
-    releasePokemon,
-    isCatching,
-    fail,
-    openModal,
-    myPokemons,
-  } = useContext(PokemonContext);
+function PokemonImage({ pokemon, id, owned }) {
+  const { releasePokemon, myPokemons } = useContext(PokemonContext);
+
+  const [isCatching, setIsCatching] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+  const [fail, setFail] = useState(false);
+
+  const catchPokemon = () => {
+    setIsCatching(true);
+    setTimeout(() => {
+      const stat = Math.random() > 0.5;
+
+      if (stat) {
+        setOpenModal(true);
+      } else {
+        setFail(true);
+
+        setTimeout(() => {
+          setFail(false);
+        }, 1000);
+      }
+
+      setIsCatching(false);
+    }, 2000);
+  };
+
+  const handleClose = () => {
+    setOpenModal(false);
+  };
 
   return (
     <Detail>
@@ -72,7 +92,7 @@ function PokemonDetail({ pokemon, id, owned }) {
         )}
       </Catch>
 
-      <ModalNickname open={openModal} data={pokemon} />
+      <ModalNickname open={openModal} data={pokemon} close={handleClose} />
     </Detail>
   );
 }
@@ -226,4 +246,4 @@ const Catch = styled.div`
   }
 `;
 
-export default PokemonDetail;
+export default PokemonImage;

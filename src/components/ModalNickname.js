@@ -5,11 +5,11 @@ import React, { useContext, useState } from "react";
 import Convetti from "react-confetti";
 import Button from "src/components/Button";
 import { PokemonContext } from "src/contexts/PokemonContext";
-import Image from 'next/image'
-import pokeBall from 'public/pokeball.png'
+import Image from "next/image";
+import pokeBall from "public/pokeball.png";
 
-export default function ModalNickname({ open, data }) {
-  const { savePokemon, setOpenModal } = useContext(PokemonContext);
+export default function ModalNickname({ open, data, close }) {
+  const { savePokemon } = useContext(PokemonContext);
   const [nickname, setNickname] = useState("");
 
   const changeNickName = async (e) => {
@@ -26,11 +26,7 @@ export default function ModalNickname({ open, data }) {
 
     savePokemon(pokemonData);
     setNickname("");
-    setOpenModal(false);
-  };
-
-  const handleClose = () => {
-    setOpenModal(false);
+    close();
   };
 
   return (
@@ -40,7 +36,7 @@ export default function ModalNickname({ open, data }) {
       )}
       <PokemonDialog
         open={open}
-        onClose={handleClose}
+        onClose={close}
         fullWidth
         maxWidth="xs"
         TransitionComponent={Grow}
@@ -56,7 +52,13 @@ export default function ModalNickname({ open, data }) {
               <small>You caught {data.name}</small>
             </div>
             <div className="form">
-              <Image src={pokeBall} alt=".." height={30} width={30} className="balls" />
+              <Image
+                src={pokeBall}
+                alt=".."
+                height={30}
+                width={30}
+                className="balls"
+              />
               <input
                 required
                 placeholder={`Nickname for ${data.name}`}
@@ -69,7 +71,7 @@ export default function ModalNickname({ open, data }) {
 
           <div className="actions">
             <div className="box">
-              <Button type="button" bg="red" onClick={handleClose}>
+              <Button type="button" bg="red" onClick={close}>
                 Release
               </Button>
             </div>

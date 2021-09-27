@@ -1,7 +1,7 @@
-import styled from "@emotion/styled";
 import React from "react";
+import styled from "@emotion/styled";
 
-function PokemonDetailCard({ pokemon }) {
+export default function PokemonInfo({ pokemon }) {
   return (
     <Container>
       <h4>Types</h4>
@@ -100,5 +100,3 @@ const List = styled.div`
     }
   }
 `;
-
-export default PokemonDetailCard;
