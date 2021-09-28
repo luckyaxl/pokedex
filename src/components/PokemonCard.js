@@ -3,7 +3,6 @@ import Grid from "@mui/material/Grid";
 import styled from "@emotion/styled";
 import { capitalize, leadZero } from "src/utils/leadZero";
 import Image from "next/image";
-import Fade from "@mui/material/Fade";
 
 function PokemonCard({ data, index, owned }) {
   return (
