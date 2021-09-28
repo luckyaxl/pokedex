@@ -13,7 +13,9 @@ const PokemonCaught = dynamic(() => import("src/components/PokemonCaught"), {
   ssr: false,
 });
 
-const InfiniteScroll = dynamic(() => import("react-infinite-scroller"));
+const InfiniteScroll = dynamic(() => import("react-infinite-scroller"), {
+  ssr: false,
+});
 
 function PokemonList() {
   const { pokemons, hasMore, loadMore } = useContext(PokemonContext);
@@ -35,18 +37,21 @@ function PokemonList() {
       <MetaTags title="Pokemons" />
       <PokemonCaught />
 
-      <InfiniteScroll
-        initialLoad={false}
-        loadMore={loadMore}
-        hasMore={hasMore}
-        loader={<Loading key={0} />}
-      >
-        <Grid container spacing={2}>
-          {pokemons.map((item, i) => (
-            <PokemonCard data={item} key={i} />
-          ))}
-        </Grid>
-      </InfiniteScroll>
+      <ScrollWrapper>
+        <InfiniteScroll
+          initialLoad={false}
+          loadMore={loadMore}
+          hasMore={hasMore}
+          threshold={800}
+          loader={<Loading key={0} />}
+        >
+          <Grid className="grid" container spacing={2}>
+            {pokemons.map((item, i) => (
+              <PokemonCard data={item} key={i} />
+            ))}
+          </Grid>
+        </InfiniteScroll>
+      </ScrollWrapper>
 
       <Link href="/mypokemons">
         <PokemonBall />
@@ -56,11 +61,16 @@ function PokemonList() {
 }
 
 const Skeleton = styled.div`
-  margin-top: 15px;
   border-radius: 8px;
   height: 247px;
   width: 100%;
   border: 1px solid #3a3f50;
+`;
+
+const ScrollWrapper = styled.div`
+  .grid {
+    margin-bottom: 15px;
+  }
 `;
 
 export default PokemonList;
