@@ -6,20 +6,13 @@ export const POKEMON_QUERY = gql`
     pokemon(name: $name) {
       name
       id
-      height
-      order
       moves {
         move {
-          id
-          url
           name
         }
       }
       types {
-        slot
         type {
-          id
-          url
           name
         }
       }

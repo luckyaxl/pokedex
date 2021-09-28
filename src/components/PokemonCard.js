@@ -23,10 +23,7 @@ function PokemonCard({ data, index, owned }) {
                 unoptimized={process.env.NODE_ENV !== "production"}
                 alt="..."
                 layout="fill"
-                src={
-                  data?.dreamworld ||
-                  `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${data.id}.svg`
-                }
+                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${data.id}.svg`}
               />
             </div>
 

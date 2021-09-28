@@ -1,7 +1,7 @@
 import Grid from "@mui/material/Grid";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import React, { useContext } from "react";
+import React, { useContext, useMemo } from "react";
 import Container from "src/components/Container";
 import MetaTags from "src/components/MetaTags";
 import PokemonBall from "src/components/PokemonBall";
@@ -32,6 +32,10 @@ function PokemonList() {
     );
   };
 
+  const pokemonList = useMemo(() => {
+    return pokemons.map((item, i) => <PokemonCard data={item} key={i} />);
+  }, [pokemons]);
+
   return (
     <Container>
       <MetaTags title="Pokemons" />
@@ -46,9 +50,7 @@ function PokemonList() {
           loader={<Loading key={0} />}
         >
           <Grid className="grid" container spacing={2}>
-            {pokemons.map((item, i) => (
-              <PokemonCard data={item} key={i} />
-            ))}
+            {pokemonList}
           </Grid>
         </InfiniteScroll>
       </ScrollWrapper>

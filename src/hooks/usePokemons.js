@@ -9,11 +9,7 @@ export const POKEMONS_QUERY = gql`
       nextOffset
       results {
         id
-        url
         name
-        image
-        artwork
-        dreamworld
       }
     }
   }
