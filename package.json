@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "format": "prettier --write **/*.{js,jsx,ts,tsx,css,md,json} --config ./.prettierrc"
+    "format": "prettier --write **/*.{js,jsx,ts,tsx,css,md,json} --config ./.prettierrc",
+    "test": "jest --watch"
   },
   "repository": {
     "type": "git",
@@ -35,8 +36,14 @@
     "sharp": "^0.29.1"
   },
   "devDependencies": {
+    "@testing-library/dom": "^8.6.0",
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^12.1.1",
+    "babel-jest": "^27.2.2",
     "eslint": "7.32.0",
     "eslint-config-next": "11.1.2",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^27.2.2",
     "prettier": "^2.4.1"
   }
 }
