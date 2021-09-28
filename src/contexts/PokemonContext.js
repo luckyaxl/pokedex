@@ -24,7 +24,7 @@ export function PokemonProvider({ children }) {
   const loadMore = () => {
     if (hasMore) {
       setTimeout(() => {
-        setOffset(data?.pokemons?.nextOffset);
+        setOffset(offset + 18);
       }, 500);
     }
   };
