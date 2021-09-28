@@ -12,18 +12,18 @@ function Loader() {
 
 const Loading = styled.div`
   position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 9999;
-  width: 100vw;
-  height: 100vh;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  inset: 0px;
+  z-index: 1000;
   background: #242735;
 
   .loads {
-    position: absolute;
+    display: inline-block;
     color: white;
-    top: 45%;
-    left: 45%;
     -webkit-animation: spin 1s linear infinite;
     -moz-animation: spin 1s linear infinite;
     animation: spin 1s linear infinite;
