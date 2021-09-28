@@ -67,6 +67,7 @@ const Skeleton = styled.div`
   height: 247px;
   width: 100%;
   border: 1px solid #3a3f50;
+  background: #1d1d27;
 `;
 
 const ScrollWrapper = styled.div`

@@ -69,7 +69,7 @@ function PokemonImage({ pokemon, id, owned }) {
             alt="pokemon"
             width={350}
             height={350}
-            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemon?.id}.svg`}
+            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`}
           />
         )}
       </div>

@@ -3,38 +3,37 @@ import Grid from "@mui/material/Grid";
 import styled from "@emotion/styled";
 import { capitalize, leadZero } from "src/utils/leadZero";
 import Image from "next/image";
-import Grow from "@mui/material/Grow";
+import Fade from "@mui/material/Fade";
 
 function PokemonCard({ data, index, owned }) {
   return (
-    <Grow in={true}>
-      <Grid item lg={2} md={3} sm={6} xs={6}>
-        <Link
-          href={owned ? `/mypokemons/${index}/${data.name}` : `/${data.name}`}
-          passHref
-        >
-          <Card>
-            <div className="id">
-              <small>#{leadZero(data.id, 3)}</small>
-            </div>
+    <Grid item lg={2} md={3} sm={6} xs={6}>
+      <Link
+        href={owned ? `/mypokemons/${index}/${data.name}` : `/${data.name}`}
+        passHref
+      >
+        <Card>
+          <div className="id">
+            <small>#{leadZero(data.id, 3)}</small>
+          </div>
 
-            <div className="img">
-              <Image
-                unoptimized={process.env.NODE_ENV !== "production"}
-                alt="..."
-                layout="fill"
-                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${data.id}.svg`}
-              />
-            </div>
+          <div className="img">
+            <Image
+              unoptimized={process.env.NODE_ENV !== "production"}
+              alt="..."
+              height={100}
+              width={100}
+              src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${data.id}.png`}
+            />
+          </div>
 
-            <div className="info">
-              <div className="name">{capitalize(data.name)}</div>
-              <div className="nickname">{data.nickname}</div>
-            </div>
-          </Card>
-        </Link>
-      </Grid>
-    </Grow>
+          <div className="info">
+            <div className="name">{capitalize(data.name)}</div>
+            <div className="nickname">{data.nickname}</div>
+          </div>
+        </Card>
+      </Link>
+    </Grid>
   );
 }
 

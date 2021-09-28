@@ -1,27 +1,29 @@
 import styled from "@emotion/styled";
 import React from "react";
-import Image from "next/image";
+import CatchingPokemonIcon from "@mui/icons-material/CatchingPokemon";
 
 function Loader() {
   return (
     <Loading>
-      <div className="loads">
-        <Image alt=".." src="/pokeball2.png" width={100} height={100} />
-      </div>
+      <CatchingPokemonIcon className="loads" />
     </Loading>
   );
 }
 
 const Loading = styled.div`
-  z-index: 10000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 100vw;
+  height: 100vh;
   background: #242735;
 
   .loads {
     position: absolute;
+    color: white;
     top: 45%;
+    left: 45%;
     -webkit-animation: spin 1s linear infinite;
     -moz-animation: spin 1s linear infinite;
     animation: spin 1s linear infinite;

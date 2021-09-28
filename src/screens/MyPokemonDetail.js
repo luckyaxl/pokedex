@@ -14,7 +14,6 @@ function PokemonDetail({ name, id }) {
     variables: {
       name,
     },
-    fetchPolicy: "no-cache",
   });
 
   if (loading) return <Loader />;
