@@ -2,26 +2,24 @@
   <img src="public/pokemon-logo.png">
 </p>
 
-# Pokester
+# Pokedex
 
-**Pokester** is a web application to get a list of Pokemon characters. You can catch pokemon, then save it with the nickname you want. Pokester supports PWA (Progressive Web Application) and responsive display for desktop and mobile.
+**Pokedex** is a web application to get a list of Pokemon characters. You can catch pokemon, then save it with the nickname you want. Pokester supports PWA (Progressive Web Application) and responsive display for desktop and mobile.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/luckyaxl/pokester.git)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/luckyaxl/pokedex.git)
 ## Stacks
 - **[Next.js](https://www.nextjs.org)** - React Framework
 - **[Material UI](https://mui.com)** - UI library
 - **[Emotion](https://emotion.sh)** - css Library
 - **[Apollo Client](https://www.apollographql.com/docs/react/get-started/)** - Remote data for GraphQL
 
-**[Demo](https://pokester.vercel.app/)**
-
 ## Development
 
 Clone and install.
 
 ```bash
-git clone https://github.com/luckyaxl/pokester.git
-cd pokester
+git clone https://github.com/luckyaxl/pokedex.git
+cd pokedex
 yarn install
 ```
 #### Development mode
