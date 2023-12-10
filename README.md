@@ -4,7 +4,7 @@
 
 # Pokedex
 
-**Pokedex** is a web application to get a list of Pokemon characters. You can catch pokemon, then save it with the nickname you want. Pokester supports PWA (Progressive Web Application) and responsive display for desktop and mobile.
+**Pokedex** is a web application to get a list of Pokemon characters. You can catch pokemon, then save it with the nickname you want. Pokedex supports PWA (Progressive Web Application) and responsive display for desktop and mobile.
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/luckyaxl/pokedex.git)
 ## Stacks
